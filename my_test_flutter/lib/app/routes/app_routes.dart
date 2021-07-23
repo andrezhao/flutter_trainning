@@ -5,7 +5,6 @@ part of './app_pages.dart';
 
 abstract class Routes {
   static const TEST = '/test'; // test page
-  static const NEWTEST = '/newtest'; // newtest page
-  static const HAHA = '/haha'; // haha page
   static const SPLASH = '/splash'; // Splash page
+  static const HOME = '/home'; // Home page
 }

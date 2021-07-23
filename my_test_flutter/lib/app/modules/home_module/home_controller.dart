@@ -3,7 +3,7 @@ import 'package:get/get.dart';
  * GetX Template Generator - fb.com/htngu.99
  * */
 
-class hahaController extends GetxController{
+class HomeController extends GetxController{
 
   var _obj = ''.obs;
   set obj(value) => _obj.value = value;

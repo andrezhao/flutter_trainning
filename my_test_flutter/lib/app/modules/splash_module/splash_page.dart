@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_test_flutter/app/modules/home_module/home_page.dart';
 import 'package:my_test_flutter/app/modules/splash_module/splash_controller.dart';
 
 import '../../../main.dart';
@@ -13,7 +14,6 @@ class SplashPage extends GetView<SplashController> {
   Widget build(BuildContext context) {
      Get.lazyPut(()=>SplashController());
      controller.countdown();
-
     return Scaffold(
       appBar: AppBar(title: Text('Splash Page')),
       body:Stack(
@@ -25,11 +25,29 @@ class SplashPage extends GetView<SplashController> {
                child: new ClipRRect( borderRadius: BorderRadius.circular(20),
                     child: Container(color: Colors.blue,
                     alignment: AlignmentDirectional(0.0, 0.0),
-                         child: Obx(() => Text (controller.obj.toString())),
-                      ),
-                    )),
+                         child: Obx(() => TextButton(onPressed: (){
+                           //controller.dispose();
+                           Get.to(HomePage());
+                        },
+                          child: Text("Skip" '${controller.obj.toString()}',style:TextStyle(color: Colors.white))),
+                     ),
+                    ))),
+        Positioned( child :new
+            Container(alignment: Alignment.center,child: new Image.asset("assets/icon/village.jpg"),
 
-            Container( alignment: Alignment(0.0, 0.0),  child: Text("チョウ FLUTTER"),
+
+              ),
+        ),
+        Positioned( bottom: 100, left: 150,child :new
+
+        Container(child: TextButton(
+          onPressed: () {  controller.dispose();
+          Get.to(HomePage());},
+          child: Text("Andre FLUTTER" ,style: TextStyle(fontSize: 20,color:Colors.blue),
+        )
+
+        ),
+            )
             ),
     ], ));
        }
