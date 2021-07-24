@@ -10,48 +10,54 @@ import '../../../main.dart';
 
 class SplashPage extends GetView<SplashController> {
   @override
-
   Widget build(BuildContext context) {
-     Get.lazyPut(()=>SplashController());
-     controller.countdown();
+    Get.lazyPut(() => SplashController());
+    controller.countdown();
     return Scaffold(
-      appBar: AppBar(title: Text('Splash Page')),
-      body:Stack(
-        children: [
-           Positioned( top: 10.0,
-               right: 10.0,
-               width: 100.0,
-               height: 30.0,
-               child: new ClipRRect( borderRadius: BorderRadius.circular(20),
-                    child: Container(color: Colors.blue,
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                         child: Obx(() => TextButton(onPressed: (){
-                           //controller.dispose();
-                           Get.to(HomePage());
-                        },
-                          child: Text("Skip" '${controller.obj.toString()}',style:TextStyle(color: Colors.white))),
-                     ),
+        appBar: AppBar(title: Text('Splash Page')),
+        body: Stack(
+          children: [
+            Positioned(
+                top: 10.0,
+                right: 10.0,
+                width: 100.0,
+                height: 30.0,
+                child: new ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      color: Colors.blue,
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Obx(
+                        () => TextButton(
+                            onPressed: () {
+                              //controller.dispose();
+                              Get.to(HomePage());
+                            },
+                            child: Text("Skip" '${controller.obj.toString()}',
+                                style: TextStyle(color: Colors.white))),
+                      ),
                     ))),
-        Positioned( child :new
-            Container(alignment: Alignment.center,child: new Image.asset("assets/icon/village.jpg"),
-
-
+            Positioned(
+              child: new Container(
+                alignment: Alignment.center,
+                child: new Image.asset("assets/icon/village.jpg"),
               ),
-        ),
-        Positioned( bottom: 100, left: 150,child :new
-
-        Container(child: TextButton(
-          onPressed: () {  controller.dispose();
-          Get.to(HomePage());},
-          child: Text("Andre FLUTTER" ,style: TextStyle(fontSize: 20,color:Colors.blue),
-        )
-
-        ),
-            )
             ),
-    ], ));
-       }
-
-
+            Positioned(
+                bottom: 100,
+                left: 150,
+                child: new Container(
+                  child: TextButton(
+                      onPressed: () {
+                        controller.dispose();
+                        Get.to(HomePage());
+                      },
+                      child: Text(
+                        "Andre FLUTTER",
+                        style: TextStyle(fontSize: 20, color: Colors.blue),
+                      )),
+                )),
+          ],
+        ));
   }
-
+}

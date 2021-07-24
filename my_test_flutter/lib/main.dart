@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:my_test_flutter/app/modules/splash_module/splash_page.dart';
 
 //MaterialAppをGetMaterialAppに置き換える
-void main() => runApp(GetMaterialApp(home: SplashPage()));
+void main() => runApp(GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashPage(),
+    ));
 
 class Controller extends GetxController {
   //obsをつけると変更を監視できるようになる。
@@ -33,7 +36,6 @@ class Home extends StatelessWidget {
               },
               child: Text("OutlineButton"),
             ),
-
             TextButton.icon(
                 onPressed: () {
                   print("TextButton.icon");
