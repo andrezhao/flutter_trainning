@@ -11,49 +11,64 @@ import 'package:my_test_flutter/app/Http/request_api.dart';
 
 import 'package:my_test_flutter/app/utils/strings.dart';
 
-class SystemPage  extends GetView<SystemController> {
-  
+class SystemPage extends GetView<SystemController> {
+
   @override
   var _systemController = Get.put<SystemController>(SystemController());
-  
-      
-  Widget build(BuildContext context) {
-     _systemController.getSystemInfo();
 
-    return  new Scaffold(
+
+
+
+  Widget build(BuildContext context) {
+    _systemController.getSystemInfoTitleList();
+    List<Widget> _getData(){
+      List<Widget> list = [];
+      for(var i=0;i<_systemController._tipItems.length;i++){
+        list.add(ListTile(
+          title: Text("${_systemController._tipItems[i].toString()}"),
+        ));
+      }
+      return list;
+    }
+   print("55555${_systemController._tipItems.length}");
+
+    return new Scaffold(
       appBar: AppBar(automaticallyImplyLeading: false,
-        centerTitle: true,  // 中央寄せを解除//设置没有返回按钮
+        centerTitle: true, // 中央寄せを解除//设置没有返回按钮
         title: new Text(SystemPageTitle),
 
       ),
-      body: Center(
-        
-        child: Text(SystemPageTitle),
+      body: Center(child: ListView (children: _getData(),),
+
       ),
     );
   }
-  }
+}
 
 class SystemController extends GetxController {
+  var _tipItems = <String>[].obs;
+
+  List<String> get tipItems => _tipItems;
 
 
-
-
-
-  void getSystemInfo() async  {
-
+    void getSystemInfoTitleList()  async{
     Map<String, dynamic> map = Map();
-    var response = await HttpManager.instance.get("https://www.wanandroid.com/tree/json");
-       map  = json.decode(response.toString());
-   // planListData  = map2['data'];
+    List<String> _list =[];
+    var response = await HttpManager.instance.get(
+        "https://www.wanandroid.com/tree/json");
+    map = json.decode(response.toString());
+     //planListData  = map2['data'];
     var treeEntity = TreeEntity.fromJson(map);
 
+   // print("1111 + ${treeEntity.data.toString()}");
     for (int i = 0; i < treeEntity.data!.length; i++) {
       treeEntity.data![i].isExpanded = false;
       print("1111111 + ${ treeEntity.data![i].name}");
+      _tipItems.add(treeEntity.data![i].name);
     }
-
-
+    print("1111 + ${_tipItems.length}");
   }
+
+
 
 }
