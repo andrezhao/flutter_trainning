@@ -15,16 +15,12 @@ class SystemPage extends GetView<SystemController> {
 
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true, // 中央寄せを解除//设置没有返回按钮
-        title: new Text(SystemPageTitle),
-      ),
       body: FutureBuilder(
           future: _systemController.getSystemInfoTitleList(),
           builder: _buildFuture),
     );
   }
+
   Widget _buildFuture(BuildContext context, AsyncSnapshot snapshot) {
     switch (snapshot.connectionState) {
       case ConnectionState.none:
@@ -44,10 +40,11 @@ class SystemPage extends GetView<SystemController> {
             itemBuilder: (context, index) =>
                 _itemBiluder(context, index, getData(snapshot.data)));
 
-    //Text("${snapshot.data[index]}"));
+      //Text("${snapshot.data[index]}"));
 
     }
   }
+
   Widget _itemBiluder(context, int index, List<dynamic> contentList) {
     return Card(
       color: Colors.white,
@@ -63,12 +60,12 @@ class SystemPage extends GetView<SystemController> {
       child: getChild(index, contentList),
     );
   }
+
   getChild(int index, List<dynamic> list) {
     return Container(
       color: Colors.white,
       alignment: Alignment.topLeft,
-      child: Column( crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           list[index].toString(),
           textAlign: TextAlign.left,
@@ -78,15 +75,21 @@ class SystemPage extends GetView<SystemController> {
       ]),
     );
   }
-  Widget _buildTipItemChildrenUI (int index) {
+
+  Widget _buildTipItemChildrenUI(int index) {
     List<Widget> _childs = [];
     List<TreeDatachild> _children = <TreeDatachild>[];
     _children = _systemController.treeEntity.data![index].children;
     for (int i = 0; i < _children.length; i++) {
-      var chip = ActionChip( label: Text(_children[i].name,style:TextStyle(color: Colors.white),),
-            backgroundColor: Colors.blue, onPressed: () {  },
-        );
-        _childs.add(chip);
+      var chip = ActionChip(
+        label: Text(
+          _children[i].name,
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.blue,
+        onPressed: () {},
+      );
+      _childs.add(chip);
     }
     return Wrap(
       spacing: 15.0,
@@ -95,6 +98,7 @@ class SystemPage extends GetView<SystemController> {
     );
   }
 }
+
 /*List<Widget> getData(List tlist) {
   List<Widget> list = [];
   for (var i = 0; i < tlist.length; i++) {
@@ -114,17 +118,16 @@ List<dynamic> getData(List tlist) {
 
 class SystemController extends GetxController {
   var _tipItems = <String>[].obs;
-  late   TreeEntity treeEntity;
+  late TreeEntity treeEntity;
 
   List<String> get tipItems => _tipItems;
-
 
   getSystemInfoTitleList() async {
     Map<String, dynamic> map = Map();
     var response =
         await HttpManager.instance.get("https://www.wanandroid.com/tree/json");
     map = json.decode(response.toString());
-     treeEntity = TreeEntity.fromJson(map);
+    treeEntity = TreeEntity.fromJson(map);
 
     for (int i = 0; i < treeEntity.data!.length; i++) {
       treeEntity.data![i].isExpanded = false;

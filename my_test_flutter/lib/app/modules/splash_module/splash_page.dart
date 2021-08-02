@@ -15,7 +15,7 @@ class SplashPage extends GetView<SplashController> {
     controller.countdown();
     return Scaffold(
         appBar: AppBar(title: Text('Splash Page')),
-        body: Stack(
+        body: Stack(  alignment: Alignment.center,
           children: [
             Positioned(
                 top: 10.0,
@@ -45,17 +45,25 @@ class SplashPage extends GetView<SplashController> {
             ),
             Positioned(
                 bottom: 100,
-                left: 150,
-                child: new Container(
-                  child: TextButton(
-                      onPressed: () {
-                        controller.dispose();
-                        Get.to(HomePage());
-                      },
-                      child: Text(
-                        "Andre FLUTTER",
-                        style: TextStyle(fontSize: 20, color: Colors.blue),
-                      )),
+                child: new Container(alignment: Alignment.center,
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                              onPressed: () {
+                                controller.dispose();
+                                Get.to(HomePage());
+                              },
+                              child: Text(
+                                "Andre FLUTTER",
+                                style: TextStyle(fontSize: 20, color: Colors.blue),
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
                 )),
           ],
         ));

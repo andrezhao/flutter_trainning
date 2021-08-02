@@ -12,11 +12,6 @@ class _MianPageState extends State<MianPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar( automaticallyImplyLeading: false,
-        centerTitle: true,  // 中央寄せを解除//设置没有返回按钮
-        title: new Text(FirestPageTitle),
-
-      ),
       body: Center(
         child: Text(FirestPageTitle),
       ),
