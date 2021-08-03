@@ -1,3 +1,5 @@
+import '../../app/modules/login_module/login_page.dart';
+import '../../app/modules/login_module/login_bindings.dart';
 import '../../app/modules/home_module/home_page.dart';
 import '../../app/modules/home_module/home_bindings.dart';
 import '../../app/modules/splash_module/splash_page.dart';
@@ -28,6 +30,11 @@ abstract class AppPages {
       name: Routes.HOME,
       page: () => HomePage(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
     ),
   ];
 }
