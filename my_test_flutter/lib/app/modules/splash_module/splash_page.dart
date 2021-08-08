@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_test_flutter/app/modules/home_module/home_page.dart';
 import 'package:my_test_flutter/app/modules/splash_module/splash_controller.dart';
+import 'package:my_test_flutter/app/utils/log_utils.dart';
 
 import '../../../main.dart';
 /**
@@ -9,13 +10,23 @@ import '../../../main.dart';
  * */
 
 class SplashPage extends GetView<SplashController> {
+  get child => null;
+
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => SplashController());
     controller.countdown();
+    controller.onInit();
+    controller.ct.forward(from: 0.0);
+
+    LogUtils.e("ssss");
+    bool _visible = true;
     return Scaffold(
-        appBar: AppBar(title: Text('Splash Page')),
-        body: Stack(  alignment: Alignment.center,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+        ),
+        body: Stack(
+          alignment: Alignment.center,
           children: [
             Positioned(
                 top: 10.0,
@@ -30,42 +41,53 @@ class SplashPage extends GetView<SplashController> {
                       child: Obx(
                         () => TextButton(
                             onPressed: () {
-                              //controller.dispose();
+                              controller.dispose();
                               Get.to(HomePage());
                             },
-                            child: Text("Skip" '${controller.obj.toString()}',
-                                style: TextStyle(color: Colors.white))),
+                            child: Text("Skip ${controller.obj}", style: TextStyle(color: Colors.white))),
                       ),
                     ))),
             Positioned(
-              child: new Container(
-                alignment: Alignment.center,
-                child: new Image.asset("assets/icon/village.jpg"),
+              child: Center(
+                child: AnimationOpav(context),
               ),
             ),
-            Positioned(
-                bottom: 100,
-                child: new Container(alignment: Alignment.center,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextButton(
-                              onPressed: () {
-                                controller.dispose();
-                                Get.to(HomePage());
-                              },
-                              child: Text(
-                                "Andre FLUTTER",
-                                style: TextStyle(fontSize: 20, color: Colors.blue),
-                              )),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
+
+            Positioned(bottom: 50, child: Animation(context)),
           ],
         ));
+  }
+
+  Widget picture() {
+    return new Image.asset("assets/icon/village.jpg");
+  }
+
+  @override
+  Widget Animation(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller.ct, // 传入动画对象
+      child: textAnimation(),
+      // 动画构建回调
+      builder: (context, child) => Transform.rotate(
+        angle: controller.ct.value * 2,
+
+        child: child, // 即 AnimatedBuilder 中的 child
+      ),
+    );
+  }
+
+  Widget textAnimation(){
+    return Container(
+       width: 100,
+      height: 100,
+      child: FlutterLogo(),
+    );
+
+  }
+
+  Widget AnimationOpav(BuildContext context) {
+    return FadeTransition(
+        opacity: controller.curve,
+        child: picture(),);
   }
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_test_flutter/app/modules/test_module/test_controller.dart';
+import 'package:my_test_flutter/app/modules/other_module/other_controller.dart';
 /**
  * GetX Template Generator - fb.com/htngu.99
  * */
 
-class testPage extends GetView<testController> {
+class OtherPage extends GetView<OtherController> {
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => OtherController());
     return Scaffold(
-      appBar: AppBar(title: Text('test Page')),
       body: Container(
         child: Obx(()=>Container(child: Text(controller.obj),)),
       ),
