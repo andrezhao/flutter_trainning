@@ -9,13 +9,10 @@ import 'package:video_player/video_player.dart';
 
 class VideoListPage extends GetView<VideoListController> {
   @override
-  late VideoPlayerController _playerController;
-  late Future<void> _initializeVideoPlayerFuture;
+  var _videoController = Get.put<VideoListController>(VideoListController());
   Widget build(BuildContext context) {
-    initState();
-    VideoPlayerController _playerController;
     Get.lazyPut(() => VideoListController());
-    var _videoController = Get.put<VideoListController>(VideoListController());
+
     return Scaffold(
       body: FutureBuilder(
         future: _videoController.getVideoList(),
@@ -23,17 +20,8 @@ class VideoListPage extends GetView<VideoListController> {
       ),
     );
   }
-  @override
-  void initState() {
-    // 動画プレーヤーの初期化
-    _playerController = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'
-    )..initialize().then((_) {
-       
-      _playerController.play();
-    });
 
-  }
+
   Widget _buildFuture(BuildContext context, AsyncSnapshot<Video> snapshot) {
     switch (snapshot.connectionState) {
       case ConnectionState.none:
@@ -46,7 +34,7 @@ class VideoListPage extends GetView<VideoListController> {
         );
       case ConnectionState.done:
         return Container(color: Colors.blue,height: 300,
-        child: _playerController.value.isInitialized
+        child: _videoController..value.isInitialized
           ? AspectRatio(
           aspectRatio: _playerController.value.aspectRatio,
           child: VideoPlayer(_playerController),
