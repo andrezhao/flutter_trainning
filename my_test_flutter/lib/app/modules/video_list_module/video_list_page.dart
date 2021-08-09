@@ -10,9 +10,11 @@ import 'package:video_player/video_player.dart';
 class VideoListPage extends GetView<VideoListController> {
   @override
   var _videoController = Get.put<VideoListController>(VideoListController());
+  late VideoPlayerController _playerController;
+
   Widget build(BuildContext context) {
     Get.lazyPut(() => VideoListController());
-
+    onInit();
     return Scaffold(
       body: FutureBuilder(
         future: _videoController.getVideoList(),
@@ -21,6 +23,14 @@ class VideoListPage extends GetView<VideoListController> {
     );
   }
 
+  void onInit() {
+    _playerController = VideoPlayerController.network(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+      ..initialize().then((_) {
+        _playerController.play();
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.);
+      });
+  }
 
   Widget _buildFuture(BuildContext context, AsyncSnapshot<Video> snapshot) {
     switch (snapshot.connectionState) {
@@ -33,16 +43,16 @@ class VideoListPage extends GetView<VideoListController> {
           child: CircularProgressIndicator(),
         );
       case ConnectionState.done:
-        return Container(color: Colors.blue,height: 300,
-        child: _videoController..value.isInitialized
-          ? AspectRatio(
-          aspectRatio: _playerController.value.aspectRatio,
-          child: VideoPlayer(_playerController),
-        )
-        : Container(),
-    );
+        return Container(
+          child: _playerController.value.isInitialized
+              ? AspectRatio(
+                  aspectRatio: _playerController.value.aspectRatio,
+                  child: VideoPlayer(_playerController),
+                )
+              : Container(child: Text("没有要播放的视频"),),
+        );
 
-           /* child: ListView.builder(
+      /* child: ListView.builder(
               itemBuilder: (BuildContext context, int index){
                 return Container(
                   child:
@@ -51,7 +61,4 @@ class VideoListPage extends GetView<VideoListController> {
         );*/
     }
   }
-
-  }
-
-
+}

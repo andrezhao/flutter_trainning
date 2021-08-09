@@ -22,44 +22,46 @@ class SplashPage extends GetView<SplashController> {
     LogUtils.e("ssss");
     bool _visible = true;
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-        ),
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-                top: 10.0,
-                right: 10.0,
-                width: 100.0,
-                height: 30.0,
-                child: new ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      color: Colors.blue,
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Obx(
-                        () => TextButton(
-                            onPressed: () {
-                              controller.dispose();
-                              Get.to(HomePage());
-                            },
-                            child: Text("Skip ${controller.obj}", style: TextStyle(color: Colors.white))),
-                      ),
-                    ))),
-            Positioned(
-              child: Center(
-                child: AnimationOpav(context),
+        body: Container(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                child: Center(
+                  child: AnimationOpav(context),
+                ),
               ),
-            ),
+             Positioned(
+                  top: 50.0,
+                  right: 10.0,
+                  width: 100.0,
+                  height: 30.0,
+                  child: new ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        color: Colors.red,
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Obx(
+                          () => TextButton(
+                              onPressed: () {
+                                controller.dispose();
+                                Get.to(HomePage());
+                              },
+                              child: Text("Skip ${controller.obj}", style: TextStyle(color: Colors.white))),
+                        ),
+                      ))),
 
-            Positioned(bottom: 50, child: Animation(context)),
-          ],
+              //Positioned(bottom: 50, child: Animation(context)),
+            ],
+          ),
         ));
   }
 
   Widget picture() {
-    return new Image.asset("assets/icon/village.jpg");
+    return  Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: new Image.asset("assets/icon/village.jpg",fit: BoxFit.cover));
   }
 
   @override

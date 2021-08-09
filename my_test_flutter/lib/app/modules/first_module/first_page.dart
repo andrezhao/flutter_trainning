@@ -22,11 +22,11 @@ class FirstPage extends GetView<FirstController> {
       floatingActionButton: FloatingActionButton(
         //浮动按钮图标
         child: Icon(
-          Icons.add,
-          color: Colors.black,
+          Icons.assistant_photo,
+          color: Colors.orange,
         ),
         //浮动按钮背景色
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.greenAccent,
         onPressed: () {
           Get.forceAppUpdate();
           if (controller.display) {

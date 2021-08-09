@@ -15,17 +15,10 @@ class VideoListController extends GetxController{
   set obj(value) => _obj.value = value;
   get obj => _obj.value;
 
-    var VideoPlayerController _playerController;
-     get
+
+   //  get
   @override
-  void onInit() {
-    _playerController = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'
-    )..initialize().then((_) {
-      update();
-      _playerController.play();
-    });
-  }
+
 
   Future<Video>getVideoList() async{
 
