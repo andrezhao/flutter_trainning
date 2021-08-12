@@ -17,7 +17,7 @@
               Video Control
  StudyPage :  Picture Swipe
 
- MyPage : GetDevice Info
+ MyPage : GetDevice Info. 
           Up Data
           ScreenSize fit
           Permission
