@@ -4,24 +4,26 @@
  2021年7月中旬开始，周末的时间
 
 ## Getting Started
+Use Framework
 
- 主要知识点
-   GetX
-   flutter_native_splash
+1.[Getx](https://pub.dev/packages/get)
+
+2.[Dio](https://pub.dev/packages/dio)，[Cookie管理](https://pub.dev/packages/dio_cookie_manager)
+
+3.[sp_util](https://pub.dev/packages/sp_util)
+
+4.[flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
+
+5.[列表的刷新和上拉加载框架pull_to_refresh](https://pub.dev/packages/pull_to_refresh)
+
+6.[图片缓存](https://pub.dev/packages/cached_network_image)
+
+7.[permission](https://pub.dev/packages/permission_handler)
+
+8[swiper](https://pub.dev/packages/flutter_swiper)
 
 
- TODO LIST
- PicturePage : page request
-               Pull to refresh
- VideoPage :  VideoList
-              Video Control
- StudyPage :  Picture Swipe
 
- MyPage : GetDevice Info
-          Up Data
-          ScreenSize fit
-          Permission
-          GetFlutter Info
 
 
 
