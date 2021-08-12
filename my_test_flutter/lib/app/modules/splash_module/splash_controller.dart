@@ -46,7 +46,7 @@ class SplashController extends GetxController
     if (_obj == 0) {
       _obj(0);
       timer.cancel();
-      Get.to(HomePage());
+      Get.off(HomePage());
     } else {
       _obj(_obj.value - 1);
       update();

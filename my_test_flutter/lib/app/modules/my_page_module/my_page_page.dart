@@ -1,30 +1,36 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_test_flutter/app/Bean/PackageInfoBean.dart';
 import 'package:my_test_flutter/app/Http/request_api.dart';
 import 'package:my_test_flutter/app/defalult/AppState.dart';
 import 'package:my_test_flutter/app/defalult/global.dart';
 import 'package:my_test_flutter/app/modules/login_module/login_controller.dart';
 import 'package:my_test_flutter/app/modules/login_module/login_page.dart';
 import 'package:my_test_flutter/app/modules/my_page_module/my_page_controller.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:image_picker/image_picker.dart';
+
 /**
  * GetX Template Generator - fb.com/htngu.99
  * */
 
 class MyPage extends GetView<MyPageController> {
+  var _myPageController = Get.put<MyPageController>(MyPageController());
+
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => MyPageController());
     return new Scaffold(
         backgroundColor: Colors.grey,
         body: new CustomScrollView(
           slivers: [
             _buildTitleUI(),
-            //_buildTopUIPage(),
             _commonUIPage(),
-            _toolUIPage(),
-            _myOther1UIPage(),
-            _myOther2UIPage(),
-            _myOther3UIPage(),
+            //_toolUIPage(),
+            _deviceInfoUIPage(),
+            _packInfoPage(),
+            //_myOther3UIPage(),
           ],
         ));
   }
@@ -181,7 +187,7 @@ class MyPage extends GetView<MyPageController> {
     );
   }
 
-  /*收藏 分享 积分 排行 历史*/
+  /*battery permission verup*/
   Row MyInfoRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,13 +196,19 @@ class MyPage extends GetView<MyPageController> {
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
           child: Column(
             children: [
-              Icon(
-                Icons.add_business_sharp,
-                size: 30,
-                color: Colors.blue,
+              Container(
+                child: Obx(
+                  () => Text(
+                    "${_myPageController.obj} %",
+                    style: TextStyle(fontSize: 20, color: Colors.red),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               Text(
-                "收藏",
+                "BATTERY INFO",
                 style: TextStyle(fontSize: 10),
               )
             ],
@@ -206,12 +218,22 @@ class MyPage extends GetView<MyPageController> {
           child: Column(
             children: [
               Icon(
-                Icons.add_to_photos_rounded,
+                Icons.camera_alt_outlined,
                 color: Colors.orange,
               ),
-              Text(
-                "分享",
-                style: TextStyle(fontSize: 10),
+              OutlinedButton(
+                onPressed: () async {
+                  if (await Permission.camera.request().isGranted) {
+
+                    _myPageController.getImage();
+
+
+                  }
+                  if (await Permission.camera.request().isPermanentlyDenied) {
+                    openAppSettings();
+                  }
+                },
+                child: Text("Camera"),
               )
             ],
           ),
@@ -224,35 +246,7 @@ class MyPage extends GetView<MyPageController> {
                 color: Colors.red,
               ),
               Text(
-                "积分",
-                style: TextStyle(fontSize: 10),
-              )
-            ],
-          ),
-        ),
-        Container(
-          child: Column(
-            children: [
-              Icon(
-                Icons.add_to_photos,
-                color: Colors.green,
-              ),
-              Text(
-                "排行榜",
-                style: TextStyle(fontSize: 10),
-              )
-            ],
-          ),
-        ),
-        Container(
-          child: Column(
-            children: [
-              Icon(
-                Icons.history,
-                color: Colors.greenAccent,
-              ),
-              Text(
-                "浏览历史",
+                "VERSION UP",
                 style: TextStyle(fontSize: 10),
               )
             ],
@@ -354,274 +348,147 @@ class MyPage extends GetView<MyPageController> {
     );
   }
 
-  Widget _myOther1UIPage() {
+  Widget _deviceInfoUIPage() {
     return SliverToBoxAdapter(
         child: Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            color: Colors.white,
-            child: _MyOther1Row()));
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: new BorderRadius.only(
+                    bottomLeft: const Radius.circular(20.0),
+                    bottomRight: const Radius.circular(20.0),
+                    topRight: const Radius.circular(20.0),
+                    topLeft: const Radius.circular(20.0))),
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            child: _deviceInfoRow()));
   }
 
-  Widget _myOther2UIPage() {
+  Widget _packInfoPage() {
     return SliverToBoxAdapter(
         child: Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            color: Colors.white,
-            child: _MyOther2Row()));
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: new BorderRadius.only(
+                    bottomLeft: const Radius.circular(20.0),
+                    bottomRight: const Radius.circular(20.0),
+                    topRight: const Radius.circular(20.0),
+                    topLeft: const Radius.circular(20.0))),
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
+            child: _packageInfoRow()));
   }
 
-  Widget _myOther3UIPage() {
-    return SliverToBoxAdapter(
-        child: Container(
-            margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            color: Colors.white,
-            child: _MyOther3Row()));
-  }
-
-  Container _MyOther1Row() {
+  Container _deviceInfoRow() {
     return Container(
       padding: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          Container(
-              alignment: Alignment.topLeft,
-              child: Text("OTHER", textAlign: TextAlign.left)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.analytics_sharp,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                    Text(
-                      "GITHUB",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
+      child: Column(children: <Widget>[
+        _DeviceInfoRow(),
+      ]),
+    );
+  }
+
+  Widget _DeviceInfoRow() {
+    return FutureBuilder(
+        future: _myPageController.getDeviceInfo(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          return switchPlatform(snapshot);
+        });
+  }
+
+  Widget _packageInfoRow() {
+    return FutureBuilder(
+        future: _myPageController.getPackageInfo(),
+        builder:
+            (BuildContext context, AsyncSnapshot<PackageInfoBean> snapshot) {
+          return Container(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  child: Text(
+                    "PACKAGE INFO",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.add_moderator,
-                      size: 30,
-                      color: Colors.yellow,
-                    ),
-                    Text(
-                      "TODO",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 30,
-                      color: Colors.pink,
-                    ),
-                    Text(
-                      "日历",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.airplanemode_inactive,
-                      size: 30,
-                      color: Colors.deepPurple,
-                    ),
-                    Text(
-                      "快递",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ],
+                itemText(100, Icons.person_outlined, "APP NAME : ",
+                    snapshot.data!.appName),
+                itemText(200, Icons.person_outlined, "PACKAGE NAME:",
+                    snapshot.data!.packageName),
+                itemText(100, Icons.person_outlined, "BUILD NUMBER:",
+                    snapshot.data!.buildNumber),
+                itemText(200, Icons.person_outlined, "VERSION:",
+                    snapshot.data!.version),
+              ],
+            ),
+          );
+        });
+  }
+
+  Widget itemText(int v, IconData icon, String title, String contents) {
+    return Container(
+      alignment: Alignment.topLeft,
+      color: Colors.grey[v],
+      margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            size: 20,
+            color: Colors.blue,
           ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            title,
+            style: TextStyle(fontSize: 15, color: Colors.blue),
+          ),
+          Container(
+            child: Expanded(
+                child: Text(
+              "${contents}",
+              style: TextStyle(fontSize: 15),
+              textAlign: TextAlign.right,
+            )),
+          )
         ],
       ),
     );
   }
 
-  Container _MyOther2Row() {
+  Widget switchPlatform(AsyncSnapshot<dynamic> snapshot) {
+    var hardWare;
+    var id;
+    var androidID;
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo info = snapshot.data;
+      hardWare = info.product;
+      id = info.id;
+      androidID = info.androidId;
+    } else {
+      IosDeviceInfo info = snapshot.data;
+      hardWare = info.systemVersion;
+      id = info.name;
+    }
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           Container(
-              alignment: Alignment.topLeft,
-              child: Text("OTHER", textAlign: TextAlign.left)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.analytics_sharp,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                    Text(
-                      "GITHUB",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.add_moderator,
-                      size: 30,
-                      color: Colors.yellow,
-                    ),
-                    Text(
-                      "TODO",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 30,
-                      color: Colors.pink,
-                    ),
-                    Text(
-                      "日历",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.airplanemode_inactive,
-                      size: 30,
-                      color: Colors.deepPurple,
-                    ),
-                    Text(
-                      "快递",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ],
+            alignment: Alignment.topLeft,
+            padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+            child: Text(
+              "DEVICE INFO",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Container _MyOther3Row() {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          Container(
-              alignment: Alignment.topLeft,
-              child: Text("OTHER3", textAlign: TextAlign.left)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.analytics_sharp,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                    Text(
-                      "GITHUB",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.add_moderator,
-                      size: 30,
-                      color: Colors.yellow,
-                    ),
-                    Text(
-                      "TODO",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 30,
-                      color: Colors.pink,
-                    ),
-                    Text(
-                      "日历",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.airplanemode_inactive,
-                      size: 30,
-                      color: Colors.deepPurple,
-                    ),
-                    Text(
-                      "快递",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+          itemText(100, Icons.person_outlined, "HARDWARE : ", hardWare),
+          itemText(200, Icons.person_outlined, "ID:", id),
+          itemText(100, Icons.person_outlined, "Android id", androidID),
         ],
       ),
     );

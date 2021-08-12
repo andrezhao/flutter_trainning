@@ -45,7 +45,7 @@ class SplashPage extends GetView<SplashController> {
                           () => TextButton(
                               onPressed: () {
                                 controller.dispose();
-                                Get.to(HomePage());
+                                Get.off(HomePage());
                               },
                               child: Text("Skip ${controller.obj}", style: TextStyle(color: Colors.white))),
                         ),
