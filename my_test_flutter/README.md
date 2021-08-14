@@ -35,6 +35,8 @@
   Swiper atuo play   
   CardView   
   Native channel conncet   
+  Camer  
+  Permission    
   Other   
   
 ## Use Framework
