@@ -16,9 +16,21 @@ class VideoListPage extends GetView<VideoListController> {
     Get.lazyPut(() => VideoListController());
     onInit();
     return Scaffold(
-      body: FutureBuilder(
+      body: /*Center(child: videoDisplay()),*/
+
+      FutureBuilder(
         future: _videoController.getVideoList(),
         builder: _buildFuture,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _playerController.value.isPlaying
+              ? _playerController.pause()
+              : _playerController.play();
+        },
+        child: Icon(
+          _playerController.value.isPlaying ? Icons.pause : Icons.play_arrow,
+        ),
       ),
     );
   }
@@ -27,7 +39,7 @@ class VideoListPage extends GetView<VideoListController> {
     _playerController = VideoPlayerController.network(
         'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
       ..initialize().then((_) {
-        _playerController.play();
+        _playerController.pause();
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.);
       });
   }
@@ -44,12 +56,16 @@ class VideoListPage extends GetView<VideoListController> {
         );
       case ConnectionState.done:
         return Container(
-          child: _playerController.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: _playerController.value.aspectRatio,
-                  child: VideoPlayer(_playerController),
-                )
-              : Container(child: Text("没有要播放的视频"),),
+          child: Center(
+            child: Container(
+              child: _playerController.value.isInitialized
+                  ? AspectRatio(
+                      aspectRatio: _playerController.value.aspectRatio,
+                      child: VideoPlayer(_playerController),
+                    )
+                  : Container(),
+            ),
+          ),
         );
 
       /* child: ListView.builder(
@@ -61,4 +77,17 @@ class VideoListPage extends GetView<VideoListController> {
         );*/
     }
   }
+
+  Widget videoDisplay() {
+    return Center(
+      child: _playerController.value.isInitialized
+          ? AspectRatio(
+              aspectRatio: _playerController.value.aspectRatio,
+              child: VideoPlayer(_playerController),
+            )
+          : Container(),
+      );
+  }
+
+
 }
