@@ -3,7 +3,8 @@
  尽可能的使用Flutter常用知识点搭建一个APP
  2021年7月中旬开始，周末的时间
  
-![APP Display Video](https://github.com/andrezhao/flutter_trainning/issues/3)
+ [APP Display Vide]
+  [](https://github.com/andrezhao/flutter_trainning/issues/3)
 
 [Image]
 
@@ -11,6 +12,9 @@
 
 <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.13.07.png" width="200" height="400" /> <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.13.15.png" width="200" height="400" /> <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.13.33.png" width="200" height="400" /> <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.13.55.png" width="200" height="400" /> 
 
+
+## OPEN API 
+ 
 
 ## Getting Started
 Use Framework
