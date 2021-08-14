@@ -4,8 +4,7 @@
  2021年7月中旬开始，周末的时间
 ![APP Display Video](https://github.com/andrezhao/flutter_trainning/issues/1)
 
-![Start Page](https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.12.25.png)
-
+![Start Page]<img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.12.25.png" width="200" height="200" />
 ## Getting Started
 Use Framework
 
