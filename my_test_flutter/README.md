@@ -8,6 +8,8 @@
 ![Start Page]
 
 <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.12.25.png" width="200" height="400" />
+<img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.11.47.png" width="200" height="400" />
+
 ## Getting Started
 Use Framework
 
