@@ -3,9 +3,9 @@
  尽可能的使用Flutter常用知识点搭建一个APP
  2021年7月中旬开始，周末的时间
  
- [APP Display Vide] (https://github.com/andrezhao/flutter_trainning/issues/3)
+ ##[APP Display Vide] (https://github.com/andrezhao/flutter_trainning/issues/3)
 
-[Image]
+##[Image]
 
 <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.12.25.png" width="200" height="400" />  <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.11.47.png" width="200" height="400" />   <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.11.59.png" width="200" height="400" /> <img src="https://github.com/andrezhao/flutter_trainning/blob/main/my_test_flutter/screenshot/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202021-08-13%20at%2018.12.47.png" width="200" height="400" />
 
@@ -13,11 +13,26 @@
 
 
 ## OPEN API 
- 
+ LOGIN = "https://www.wanandroid.com/user/login";
+ LOGOUT = "https://www.wanandroid.com/user/logout/json";
+ TIMELINE_PAGE = "https://www.wanandroid.com/wxarticle/chapters/json";
+ FIRST_PAGE = "https://pixabay.com/api/?key=17749769-5828b1575ac72c690377e8587&q=sea&image_type=photo";
+ PERSON_PAGE_AVATAR = "http://api.btstu.cn/sjtx/api.php?lx=c1&format=images"
 
 ## Getting Started
-Use Framework
-
+  ListView 
+  TimeLineList
+  WaterfalList
+  Navigation
+  BootSheet
+  Dialog Toast
+  Video
+  Swiper atuo play
+  CardView
+  Native channel conncet 
+  Other
+  
+## Use Framework
 1.[Getx](https://pub.dev/packages/get)
 
 2.[Dio](https://pub.dev/packages/dio)，[Cookie管理](https://pub.dev/packages/dio_cookie_manager)
