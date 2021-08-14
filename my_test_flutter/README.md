@@ -3,7 +3,7 @@
  尽可能的使用Flutter常用知识点搭建一个APP
  2021年7月中旬开始，周末的时间
  
-![APP Display Video](https://github.com/andrezhao/flutter_trainning/issues/2)
+![APP Display Video](https://github.com/andrezhao/flutter_trainning/issues/3)
 
 [Image]
 
