@@ -25,17 +25,17 @@
  
 
 ## Getting Started
-  ListView 
-  TimeLineList
-  WaterfalList
-  Navigation
-  BootSheet
-  Dialog Toast
-  Video
-  Swiper atuo play
-  CardView
-  Native channel conncet 
-  Other
+  ListView   
+  TimeLineList  
+  WaterfalList   
+  Navigation   
+  BootSheet   
+  Dialog Toast  
+  Video   
+  Swiper atuo play   
+  CardView   
+  Native channel conncet   
+  Other   
   
 ## Use Framework
 1.[Getx](https://pub.dev/packages/get)
