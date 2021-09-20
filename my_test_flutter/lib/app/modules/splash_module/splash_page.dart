@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_test_flutter/app/modules/home_module/home_page.dart';
 import 'package:my_test_flutter/app/modules/splash_module/splash_controller.dart';
 import 'package:my_test_flutter/app/utils/log_utils.dart';
+import 'package:common_utils/common_utils.dart';
 
 import '../../../main.dart';
 /**
@@ -19,7 +20,7 @@ class SplashPage extends GetView<SplashController> {
     controller.onInit();
     controller.ct.forward(from: 0.0);
 
-    LogUtils.e("ssss");
+    LogUtil.e("ssss");
     bool _visible = true;
     return Scaffold(
         body: Container(

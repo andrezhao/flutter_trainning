@@ -55,6 +55,9 @@ dev_dependencies:
   image_crop: any
   camera: ^0.8.1+7
   flutter_interactional_widget: 1.0.0
+  common_utils: ^2.0.2
+  charts_flutter: ^0.11.0
+
 
 
 # For information on the generic Dart part of this file, see the

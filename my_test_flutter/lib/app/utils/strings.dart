@@ -8,3 +8,4 @@ String PublicPageTitle="VIDEO";
 String SystemPageTitle ="STUDY";
 String ProjectPageTitle ="TIME";
 String MyPageTitle ="MY";
+String MyCharts ="CHARTS";

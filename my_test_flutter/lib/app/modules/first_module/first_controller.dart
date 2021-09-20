@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_test_flutter/app/Bean/FirstBean.dart';
 import 'package:my_test_flutter/app/Http/http_manager.dart';
 import 'package:my_test_flutter/app/Http/request_api.dart';
-import 'package:my_test_flutter/app/utils/log_utils.dart';
+import 'package:common_utils/common_utils.dart';
 /**
  * GetX Template Generator - fb.com/htngu.99
  * */
@@ -24,7 +24,7 @@ class FirstController extends GetxController{
   get currentIndex=> _currentIndex.value;
   set currentIndex(value) {
     _currentIndex.value = value;
-    LogUtils.e("${_currentIndex}");
+    LogUtil.e("${_currentIndex}");
   }
 
   Future<Welcome> getPhotoList() async{
@@ -34,7 +34,7 @@ class FirstController extends GetxController{
     var photo = Welcome.fromJson(map);
 
      print("www ${response.toString()}");
-    // print("www ${photo.hits.length.toString()}");
+    LogUtil.e("${photo}");
     return photo;
   }
 

@@ -6,6 +6,7 @@ import 'package:my_test_flutter/app/modules/home_module/home_controller.dart';
 import 'package:my_test_flutter/app/modules/home_module/home_page.dart';
 import 'package:my_test_flutter/app/utils/log_utils.dart';
 import 'package:my_test_flutter/app/utils/strings.dart';
+import 'package:common_utils/common_utils.dart';
 
 import '../../../main.dart';
 /**
@@ -61,6 +62,5 @@ class SplashController extends GetxController
 
   void initData() async {
     bool isLog = !bool.fromEnvironment("dart.vm.product");
-    LogUtils.init(islog: isLog);
   }
 }

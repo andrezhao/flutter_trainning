@@ -6,6 +6,8 @@ import 'package:my_test_flutter/app/Bean/new_tree.dart';
 import 'package:my_test_flutter/app/Http/http_manager.dart';
 import 'package:my_test_flutter/app/modules/first_module/first_page.dart';
 import 'package:my_test_flutter/app/widget/SystemPage.dart';
+import 'package:common_utils/common_utils.dart';
+
 /**
  * GetX Template Generator - fb.com/htngu.99
  * */
@@ -18,16 +20,16 @@ class HomeController extends GetxController{
 
   List<Widget> _pageList = [];
 
-  var appBarTitles = ['PICTURE', 'VIDEO', 'STUDY', 'TIME' 'MY'];
+  //var appBarTitles = ['PICTURE', 'VIDEO', 'STUDY', 'TIME' 'MY'];
 
-  List<Widget> getData(){
+  /*List<Widget> getData(){
     _pageList.add(FirstPage());
     _pageList.add(SystemPage());
     _pageList.add(SystemPage());
     _pageList.add(SystemPage());
     _pageList.add(SystemPage());
     return _pageList;
-  }
+  }*/
 
   Future<List> getSystemInfoTitleList() async  {
 
@@ -40,7 +42,7 @@ class HomeController extends GetxController{
 
     for (int i = 0; i < treeEntity.data!.length; i++) {
       treeEntity.data![i].isExpanded = false;
-      print("1111111 + ${ treeEntity.data![i].name}");
+      LogUtil.d("1111111 + ${ treeEntity.data![i].name}");
       list.add(treeEntity.data![i].name);
     }
     return list;
